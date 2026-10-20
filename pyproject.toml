@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fly-trance"
+version = "0.1.0"
+description = "A live Magenta instrument driven by the authentic LiquidAion CX512 connectome"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = ["numpy>=2,<3", "scipy>=1.14,<2", "torch>=2.8,<3", "transformers>=5.8,<6", "safetensors>=0.6", "sentencepiece>=0.2", "soundfile>=0.13"]
+
+[project.optional-dependencies]
+desktop = ["PySide6>=6.8,<7", "pyvista>=0.45,<0.47", "pyvistaqt>=0.11,<0.12", "vtk>=9.5,<9.6", "sounddevice>=0.5"]
+test = ["pytest>=8", "pillow>=10"]
+
+[project.scripts]
+fly-trance = "fly_trance.gui:main"
+fly-trance-render = "fly_trance.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+fly_trance = ["data/**/*"]
